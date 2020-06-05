@@ -14,9 +14,9 @@ var getComments = function () {
   var com = [];
   for (var i = 0; i <= getRandom(4); i++) {
     com[i] = {
-    avatar: 'img/avatar-' + getRandom(6) + 1 + '.svg',
-    message: COMMENTS[getRandom(COMMENTS.length)],
-    name: NAMES[getRandom(NAMES.length)],
+      avatar: 'img/avatar-' + getRandom(6) + 1 + '.svg',
+      message: COMMENTS[getRandom(COMMENTS.length)],
+      name: NAMES[getRandom(NAMES.length)],
     };
   }
   return com;
@@ -28,10 +28,10 @@ var getUserPhotos = function () {
   var userPhotos = [];
   for (var i = 0; i < 25; i++) {
     userPhotos[i] = {
-    url: 'photos/' + i + 1 + '.jpg',
-    description: ALTS[i],
-    likes: getRandom(186) + 15,
-    comments: getComments(),
+      url: 'photos/' + i + 1 + '.jpg',
+      description: ALTS[i],
+      likes: getRandom(186) + 15,
+      comments: getComments(),
     };
   }
   return userPhotos;
