@@ -34,7 +34,7 @@ window.photoRedactor = (function () {
 
   userPhotoInput.addEventListener('change', function () {
     var photoIndex = userPhotoInput.value.split('\\').slice(-1);
-    userPhoto.src = 'C:/1209353-kekstagram-20/photos/' + photoIndex;
+    userPhoto.src = 'photos/' + photoIndex;
   });
 
   // Вкл/откл закрытия превью по ESC

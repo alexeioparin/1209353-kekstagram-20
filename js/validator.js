@@ -1,10 +1,15 @@
 'use strict';
 
 window.validator = (function () {
-  /* Валидация инпута шэштегов */
+
+  // вызов обработчика скроллбара эффектов
+
+  window.effectScrollbar.effectLevelPin.addEventListener('mousedown', window.effectScrollbar.effectScrollBar);
+
+  // Валидация инпута шэштегов
 
   return {
-    /* ...на повторы */
+    // ...на повторы
 
     checkInputForRepeat: function (checkLength, checkedTags) {
       var isRepeat;
@@ -16,7 +21,7 @@ window.validator = (function () {
       return isRepeat;
     },
 
-    /* ...на формат данных */
+    // ...на формат данных
 
     checkInputForFormat: function (regularExp, checkedTags) {
       var isInvalid = {};
@@ -31,7 +36,7 @@ window.validator = (function () {
       return isInvalid;
     },
 
-    /* Обработка инпута */
+    // Обработка инпута
 
     checkHashtagInpit: function () {
       var userHashtags = window.photoRedactor.hashtagInput.value.split(' ', 5);
