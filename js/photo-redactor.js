@@ -27,6 +27,12 @@ window.photoRedactor = (function () {
       hashtagInput.value = '';
       hashtagInput.setAttribute('style', 'none');
       commentOnPhotoEditor.value = '';
+      window.effectScrollbar.userPhoto.classList.add('hidden');
+      if (window.effectScrollbar.userPhoto.classList.length > 1) {
+        window.effectScrollbar.userPhoto.classList.remove(window.effectScrollbar.userPhoto.classList.item(0));
+      }
+      window.photoRedactor.userImagePreview.style.transform = 'none';
+      window.photoRedactor.imageSizeWindow.setAttribute('value', '100%');
     }
   };
 
@@ -75,6 +81,7 @@ window.photoRedactor = (function () {
     hashtagInput.removeEventListener('blur', outInputEscOn);
     commentOnPhotoEditor.addEventListener('focus', onInputEscCancel);
     commentOnPhotoEditor.addEventListener('blur', outInputEscOn);
+    window.photoRedactorEffect.iSize = window.main.IMAGE_SIZE;
   };
 
   userPhotoInput.addEventListener('change', function () {
