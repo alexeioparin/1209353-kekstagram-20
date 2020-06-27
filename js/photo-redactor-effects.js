@@ -12,7 +12,7 @@ window.photoRedactorEffect = (function () {
     marvin: 'invert',
     phobos: 'blur',
     heat: 'brightness',
-  }
+  };
 
   // +- Картинки превью
 
