@@ -33,15 +33,18 @@ window.photoRedactor = (function () {
       }
       window.photoRedactor.userImagePreview.style.transform = 'none';
       window.photoRedactor.imageSizeWindow.setAttribute('value', '100%');
+      userPhoto.style = 'none';
+      effectLevelBar.classList.add('hidden');
     }
   };
 
   // Загрузка фото
 
-  userPhotoInput.addEventListener('change', function () {
+  /* userPhotoInput.addEventListener('change', function () {
     var photoIndex = userPhotoInput.value.split('\\').slice(-1);
+    console.log(userPhotoInput.value);
     userPhoto.src = 'photos/' + photoIndex;
-  });
+  }); */
 
   // Вкл/откл закрытия превью по ESC
 
@@ -81,7 +84,15 @@ window.photoRedactor = (function () {
     hashtagInput.removeEventListener('blur', outInputEscOn);
     commentOnPhotoEditor.addEventListener('focus', onInputEscCancel);
     commentOnPhotoEditor.addEventListener('blur', outInputEscOn);
+    window.effectScrollbar.userPhoto.classList.add('hidden');
+    if (window.effectScrollbar.userPhoto.classList.length > 1) {
+      window.effectScrollbar.userPhoto.classList.remove(window.effectScrollbar.userPhoto.classList.item(0));
+    }
     window.photoRedactorEffect.iSize = window.main.IMAGE_SIZE;
+    window.photoRedactor.userImagePreview.style = 'none';
+    window.photoRedactor.imageSizeWindow.setAttribute('value', '100%');
+    userPhoto.style = 'none';
+    effectLevelBar.classList.add('hidden');
   };
 
   userPhotoInput.addEventListener('change', function () {
