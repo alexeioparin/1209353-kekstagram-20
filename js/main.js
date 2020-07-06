@@ -73,6 +73,7 @@ window.main = (function () {
     photoList.appendChild(fragment);
   };
 
+
   // Отображение окна ошибок
 
   var errorHandler = function (errorMessage) {
@@ -88,7 +89,6 @@ window.main = (function () {
   };
 
   window.backend.load(setUserElement, errorHandler);
-
 
   // bigPicture.classList.remove('hidden');
 
@@ -107,9 +107,9 @@ window.main = (function () {
     IMAGE_SIZE: IMAGE_SIZE,
     ESC_BUTTON: ESC_BUTTON,
     ENTER_BUTTON: ENTER_BUTTON,
-    getRandom: function (number) {
-      return Math.floor(Math.random() * number);
-    },
+    getRandom: getRandom,
     indexBody: indexBody,
+    errorHandler: errorHandler,
+    setUserElement: setUserElement,
   };
 })();
