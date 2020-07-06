@@ -5,18 +5,11 @@ window.sortPhoto = (function () {
   var defaultButton = document.querySelector('#filter-default');
   var randomButton = document.querySelector('#filter-random');
   var discussedButton = document.querySelector('#filter-discussed');
-  var eraseBlock = function (block, deletedElemSelector) {
-    var allPhotos = document.querySelectorAll(deletedElemSelector);
-    for (var i = 0; i < allPhotos.length; i++) {
-      block.lastChild.remove();
-    }
-  };
 
   // Обработчик кнопки по умолчанию
 
   defaultButton.addEventListener('click', function () {
     var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(window.backend.loadedData);
     };
     window.debounce.winDebounce(tempFunc);
@@ -41,7 +34,6 @@ window.sortPhoto = (function () {
     };
     var newMass = userShortPhotoList(window.backend.loadedData, SHORT_MASS_LENGTH);
     var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(newMass);
     };
     window.debounce.winDebounce(tempFunc);
@@ -68,7 +60,6 @@ window.sortPhoto = (function () {
       return diff;
     });
     var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(newMass);
     };
     window.debounce.winDebounce(tempFunc);
