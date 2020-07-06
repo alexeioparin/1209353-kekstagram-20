@@ -15,8 +15,8 @@ window.sortPhoto = (function () {
   // Обработчик кнопки по умолчанию
 
   defaultButton.addEventListener('click', function () {
-    eraseBlock(window.main.photoList, '.pictures a');
     var tempFunc = function () {
+      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(window.backend.loadedData);
     };
     window.debounce.winDebounce(tempFunc);
@@ -28,7 +28,6 @@ window.sortPhoto = (function () {
   // Обработчик для отображения 10 случайных фото
 
   randomButton.addEventListener('click', function () {
-    eraseBlock(window.main.photoList, '.pictures a');
     // Формирование массива случайных элементов
     var userShortPhotoList = function (mass, elemLimit) {
       var shortMass = [];
@@ -42,6 +41,7 @@ window.sortPhoto = (function () {
     };
     var newMass = userShortPhotoList(window.backend.loadedData, SHORT_MASS_LENGTH);
     var tempFunc = function () {
+      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(newMass);
     };
     window.debounce.winDebounce(tempFunc);
@@ -53,7 +53,6 @@ window.sortPhoto = (function () {
   // Обработчик для выведения самых обсуждаемых фото
 
   discussedButton.addEventListener('click', function () {
-    eraseBlock(window.main.photoList, '.pictures a');
     var newMass = window.backend.loadedData.slice();
     newMass.sort(function (a, b) {
       var diff;
@@ -69,6 +68,7 @@ window.sortPhoto = (function () {
       return diff;
     });
     var tempFunc = function () {
+      eraseBlock(window.main.photoList, '.pictures a');
       window.main.setUserElement(newMass);
     };
     window.debounce.winDebounce(tempFunc);
