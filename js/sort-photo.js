@@ -5,21 +5,13 @@ window.sortPhoto = (function () {
   var defaultButton = document.querySelector('#filter-default');
   var randomButton = document.querySelector('#filter-random');
   var discussedButton = document.querySelector('#filter-discussed');
-  var eraseBlock = function (block, deletedElemSelector) {
-    var allPhotos = document.querySelectorAll(deletedElemSelector);
-    allPhotos.forEach(function () {
-      block.lastChild.remove();
-    });
-  };
+  var massForShow = [];
 
   // Обработчик кнопки по умолчанию
 
   defaultButton.addEventListener('click', function () {
-    var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
-      window.main.setUserElement(window.backend.loadedData);
-    };
-    window.debounce.winDebounce(tempFunc);
+    window.sortPhoto.massForShow = window.backend.loadedData;
+    window.debounce.winDebounce();
     defaultButton.classList.add('img-filters__button--active');
     randomButton.classList.remove('img-filters__button--active');
     discussedButton.classList.remove('img-filters__button--active');
@@ -39,12 +31,8 @@ window.sortPhoto = (function () {
       }
       return shortMass;
     };
-    var newMass = userShortPhotoList(window.backend.loadedData, SHORT_MASS_LENGTH);
-    var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
-      window.main.setUserElement(newMass);
-    };
-    window.debounce.winDebounce(tempFunc);
+    window.sortPhoto.massForShow = userShortPhotoList(window.backend.loadedData, SHORT_MASS_LENGTH);
+    window.debounce.winDebounce();
     randomButton.classList.add('img-filters__button--active');
     defaultButton.classList.remove('img-filters__button--active');
     discussedButton.classList.remove('img-filters__button--active');
@@ -67,14 +55,14 @@ window.sortPhoto = (function () {
       }
       return diff;
     });
-    var tempFunc = function () {
-      eraseBlock(window.main.photoList, '.pictures a');
-      window.main.setUserElement(newMass);
-    };
-    window.debounce.winDebounce(tempFunc);
+    window.sortPhoto.massForShow = newMass;
+    window.debounce.winDebounce();
     defaultButton.classList.remove('img-filters__button--active');
     randomButton.classList.remove('img-filters__button--active');
     discussedButton.classList.add('img-filters__button--active');
   });
 
+  return {
+    massForShow: massForShow,
+  };
 })();
