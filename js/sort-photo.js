@@ -10,8 +10,8 @@ window.sortPhoto = (function () {
   // Обработчик кнопки по умолчанию
 
   defaultButton.addEventListener('click', function () {
-    window.sortPhoto.massForShow = window.backend.loadedData;
-    window.debounce.winDebounce();
+    window.sortPhoto.massForShow = window.main.loadedData;
+    window.debounce.photoShowTimeoutRefresh();
     defaultButton.classList.add('img-filters__button--active');
     randomButton.classList.remove('img-filters__button--active');
     discussedButton.classList.remove('img-filters__button--active');
@@ -31,8 +31,8 @@ window.sortPhoto = (function () {
       }
       return shortMass;
     };
-    window.sortPhoto.massForShow = userShortPhotoList(window.backend.loadedData, SHORT_MASS_LENGTH);
-    window.debounce.winDebounce();
+    window.sortPhoto.massForShow = userShortPhotoList(window.main.loadedData, SHORT_MASS_LENGTH);
+    window.debounce.photoShowTimeoutRefresh();
     randomButton.classList.add('img-filters__button--active');
     defaultButton.classList.remove('img-filters__button--active');
     discussedButton.classList.remove('img-filters__button--active');
@@ -41,7 +41,7 @@ window.sortPhoto = (function () {
   // Обработчик для выведения самых обсуждаемых фото
 
   discussedButton.addEventListener('click', function () {
-    var newMass = window.backend.loadedData.slice();
+    var newMass = window.main.loadedData.slice();
     newMass.sort(function (a, b) {
       var diff;
       if (a.comments > b.comments) {
@@ -56,7 +56,7 @@ window.sortPhoto = (function () {
       return diff;
     });
     window.sortPhoto.massForShow = newMass;
-    window.debounce.winDebounce();
+    window.debounce.photoShowTimeoutRefresh();
     defaultButton.classList.remove('img-filters__button--active');
     randomButton.classList.remove('img-filters__button--active');
     discussedButton.classList.add('img-filters__button--active');

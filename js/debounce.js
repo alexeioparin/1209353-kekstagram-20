@@ -9,7 +9,7 @@ window.debounce = (function () {
       block.lastChild.remove();
     });
   };
-  var winDebounce = function () {
+  var photoShowTimeoutRefresh = function () {
     if (lastTimeout) {
       window.clearTimeout(lastTimeout);
     }
@@ -20,6 +20,6 @@ window.debounce = (function () {
   };
 
   return {
-    winDebounce: winDebounce,
+    photoShowTimeoutRefresh: photoShowTimeoutRefresh,
   };
 })();

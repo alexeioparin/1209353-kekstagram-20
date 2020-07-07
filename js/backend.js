@@ -5,8 +5,6 @@ window.backend = (function () {
   var StatusCode = {
     OK: 200
   };
-  var sortBlock = document.querySelector('.img-filters');
-  var loadedData = [];
 
   // создание запроса, загрузка информации с сервера
 
@@ -19,8 +17,6 @@ window.backend = (function () {
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
-        window.backend.loadedData = xhr.response;
-        sortBlock.classList.remove('img-filters--inactive');
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
@@ -62,7 +58,6 @@ window.backend = (function () {
 
   return {
     load: load,
-    loadedData: loadedData,
   //  save: save,
   };
 })();
