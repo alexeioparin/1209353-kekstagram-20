@@ -23,8 +23,10 @@ window.main = (function () {
   var bigPictureComments = bigPicture.querySelector('.comments-count');
   // var commentList = bigPicture.querySelector('.social__comments');
   var indexBody = document.querySelector('body');
+  var sortBlock = document.querySelector('.img-filters');
+  var loadedData = [];
 
-  /* Формирование комментариев */
+  // Формирование комментариев
 
   var getComments = function () {
     var comments = [];
@@ -38,7 +40,7 @@ window.main = (function () {
     return comments;
   };
 
-  /* Формирование фотографий с комментариями */
+  // Формирование фотографий с комментариями
 
   var getUserPhotos = function () {
     var userPhotos = [];
@@ -53,7 +55,7 @@ window.main = (function () {
     return userPhotos;
   };
 
-  /* Создание DOM элемента */
+  // Создание DOM элемента
 
   var getUserElement = function (user) {
     var userElement = template.cloneNode(true);
@@ -63,7 +65,7 @@ window.main = (function () {
     return userElement;
   };
 
-  // Добавление изображений с сервера
+  // Отрисовка похожих элементов
 
   var setUserElement = function (userPhotoList) {
     var fragment = document.createDocumentFragment();
@@ -71,6 +73,14 @@ window.main = (function () {
       fragment.appendChild(getUserElement(userPhotoList[i]));
     }
     photoList.appendChild(fragment);
+  };
+
+  // Успешное добавление изображений с сервера
+
+  var successHandler = function (data) {
+    window.main.loadedData = data;
+    setUserElement(window.main.loadedData);
+    sortBlock.classList.remove('img-filters--inactive');
   };
 
   // Отображение окна ошибок
@@ -87,12 +97,12 @@ window.main = (function () {
     document.body.insertAdjacentElement('afterbegin', node);
   };
 
-  window.backend.load(setUserElement, errorHandler);
+  window.backend.load(successHandler, errorHandler);
 
 
   // bigPicture.classList.remove('hidden');
 
-  /* Определение свойств элементов большого фото */
+  // Определение свойств элементов большого фото
 
   bigPictureFoto.src = getUserPhotos()[0].url;
   bigPictureLikes.textContent = String(getUserPhotos()[0].likes);
@@ -107,9 +117,10 @@ window.main = (function () {
     IMAGE_SIZE: IMAGE_SIZE,
     ESC_BUTTON: ESC_BUTTON,
     ENTER_BUTTON: ENTER_BUTTON,
-    getRandom: function (number) {
-      return Math.floor(Math.random() * number);
-    },
+    getRandom: getRandom,
     indexBody: indexBody,
+    errorHandler: errorHandler,
+    setUserElement: setUserElement,
+    loadedData: loadedData,
   };
 })();
