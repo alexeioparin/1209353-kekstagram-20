@@ -15,11 +15,12 @@ window.debounce = (function () {
     }
     lastTimeout = window.setTimeout(function () {
       eraseBlock(window.main.photoList, '.pictures a');
-      window.main.setUserElement(window.sortPhoto.massForShow);
+      window.main.setUserElement(window.sortPhoto.massForShow, window.main.getUserElement, window.main.photoList);
     }, DEBOUNCE_INTERVAL);
   };
 
   return {
     photoShowTimeoutRefresh: photoShowTimeoutRefresh,
+    eraseBlock: eraseBlock,
   };
 })();

@@ -38,14 +38,6 @@ window.photoRedactor = (function () {
     }
   };
 
-  // Загрузка фото
-
-  /* userPhotoInput.addEventListener('change', function () {
-    var photoIndex = userPhotoInput.value.split('\\').slice(-1);
-    console.log(userPhotoInput.value);
-    userPhoto.src = 'photos/' + photoIndex;
-  }); */
-
   // Вкл/откл закрытия превью по ESC
 
   var onInputEscCancel = function () {
