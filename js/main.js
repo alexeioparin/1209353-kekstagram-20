@@ -15,7 +15,7 @@ window.main = (function () {
 
   // Создание DOM элемента
 
-  var getUserElement = function (user) {
+  var createSmallPhoto = function (user) {
     var userElement = template.cloneNode(true);
     userElement.querySelector('.picture__img').setAttribute('src', user.url);
     userElement.querySelector('.picture__likes').textContent = user.likes;
@@ -25,10 +25,10 @@ window.main = (function () {
 
   // Отрисовка похожих элементов
 
-  var setUserElement = function (userPhotoList, addTemplateFunc, placeToAdd, elementLimit) {
+  var setSimilarElement = function (userPhotoList, addTemplateFunc, placeToAdd, elementLimit) {
     var fragment = document.createDocumentFragment();
     var elemNumber;
-    if (elementLimit) {
+    if (elementLimit && elementLimit < userPhotoList.length) {
       elemNumber = elementLimit;
     } else {
       elemNumber = userPhotoList.length;
@@ -43,7 +43,7 @@ window.main = (function () {
 
   var successHandler = function (data) {
     window.main.loadedData = data;
-    setUserElement(window.main.loadedData, window.main.getUserElement, window.main.photoList);
+    setSimilarElement(window.main.loadedData, window.main.createSmallPhoto, window.main.photoList);
     sortBlock.classList.remove('img-filters--inactive');
   };
 
@@ -70,8 +70,8 @@ window.main = (function () {
     getRandom: getRandom,
     indexBody: indexBody,
     errorHandler: errorHandler,
-    getUserElement: getUserElement,
-    setUserElement: setUserElement,
+    createSmallPhoto: createSmallPhoto,
+    setSimilarElement: setSimilarElement,
     loadedData: loadedData,
   };
 })();

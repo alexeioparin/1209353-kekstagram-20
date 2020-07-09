@@ -13,7 +13,7 @@ window.bigPictureExplore = (function () {
   var bigPictureCloseButton = document.querySelector('#picture-cancel');
   var templateForComment = document.querySelector('#picture-big').content.querySelector('li');
 
-  var getRandomUserComment = function (commentMass) {
+  var createBigPhotoComment = function (commentMass) {
     var userElement = templateForComment.cloneNode(true);
     userElement.querySelector('.social__text').textContent = commentMass.message;
     userElement.querySelector('.social__picture').setAttribute('src', commentMass.avatar);
@@ -74,7 +74,7 @@ window.bigPictureExplore = (function () {
       for (var i = 0; i < comListLength; i++) {
         commentList.lastChild.remove();
       }
-      window.main.setUserElement(window.main.loadedData[photoNumber].comments, getRandomUserComment, commentList, MAX_COMMENTS);
+      window.main.setSimilarElement(window.main.loadedData[photoNumber].comments, createBigPhotoComment, commentList, MAX_COMMENTS);
     }
   };
 
