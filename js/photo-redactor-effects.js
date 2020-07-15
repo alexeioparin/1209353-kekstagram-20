@@ -6,7 +6,7 @@ window.photoRedactorEffect = (function () {
   var IMAGE_MAX_SIZE = 100;
   var iSize = window.main.IMAGE_SIZE;
   var filterName;
-  var filtersByTargetValue = {
+  var FiltersByTargetValue = {
     chrome: 'grayscale',
     sepia: 'sepia',
     marvin: 'invert',
@@ -47,7 +47,7 @@ window.photoRedactorEffect = (function () {
         window.effectScrollbar.effectLevelPin.style.left = '449px';
         window.effectScrollbar.effectLevelDepth.style.width = '449px';
         window.photoRedactorEffect.setEffect(evt.target.value);
-        window.photoRedactorEffect.filterName = filtersByTargetValue[evt.target.value];
+        window.photoRedactorEffect.filterName = FiltersByTargetValue[evt.target.value];
       } else {
         window.photoRedactor.effectLevelBar.classList.add('hidden');
         window.effectScrollbar.userPhoto.classList.add('effects__preview--' + evt.target.value);
