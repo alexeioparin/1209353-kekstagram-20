@@ -31,12 +31,11 @@ window.backend = (function () {
     xhr.send();
   };
 
-  /* var save = function (data, onLoad, onError) {
+  var save = function (data, onLoad, onError) {
     var TIMEOUT_IN_MS = 10000;
-    var URL = 'https://javascript.pages.academy/code-and-magick';
+    var URL = 'https://javascript.pages.academy/kekstagram';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-
     xhr.open('POST', URL);
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
@@ -52,12 +51,11 @@ window.backend = (function () {
       onError('Загрузка не успела выполниться за ' + xhr.timeout + 'мс');
     });
     xhr.timeout = TIMEOUT_IN_MS;
-
     xhr.send(data);
-  }; */
+  };
 
   return {
     load: load,
-  //  save: save,
+    save: save,
   };
 })();

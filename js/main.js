@@ -4,37 +4,38 @@ window.main = (function () {
   var IMAGE_SIZE = 100;
   var ESC_BUTTON = 'Escape';
   var ENTER_BUTTON = 'Enter';
-  var template = document.querySelector('#picture').content.querySelector('a');
+  var photoTemplate = document.querySelector('#picture').content.querySelector('a');
   var getRandom = function (number) {
     return Math.floor(Math.random() * number);
   };
   var photoList = document.querySelector('.pictures');
   var indexBody = document.querySelector('body');
+  var indexMain = document.querySelector('main');
   var sortBlock = document.querySelector('.img-filters');
   var loadedData = [];
 
-  // Создание DOM элемента
+  // Создание миниатюры фото
 
   var createSmallPhoto = function (user) {
-    var userElement = template.cloneNode(true);
+    var userElement = photoTemplate.cloneNode(true);
     userElement.querySelector('.picture__img').setAttribute('src', user.url);
     userElement.querySelector('.picture__likes').textContent = user.likes;
     userElement.querySelector('.picture__comments').textContent = user.comments.length;
     return userElement;
   };
 
-  // Отрисовка похожих элементов
+  // Отрисовка шаблонных элементов
 
-  var setSimilarElement = function (userPhotoList, addTemplateFunc, placeToAdd, elementLimit) {
+  var setSimilarElement = function (itemList, addTemplateFunc, placeToAdd, elementLimit) {
     var fragment = document.createDocumentFragment();
     var elemNumber;
-    if (elementLimit && elementLimit < userPhotoList.length) {
+    if (elementLimit && elementLimit < itemList.length) {
       elemNumber = elementLimit;
     } else {
-      elemNumber = userPhotoList.length;
+      elemNumber = itemList.length;
     }
     for (var i = 0; i < elemNumber; i++) {
-      fragment.appendChild(addTemplateFunc(userPhotoList[i]));
+      fragment.appendChild(addTemplateFunc(itemList[i]));
     }
     placeToAdd.appendChild(fragment);
   };
@@ -69,6 +70,7 @@ window.main = (function () {
     ENTER_BUTTON: ENTER_BUTTON,
     getRandom: getRandom,
     indexBody: indexBody,
+    indexMain: indexMain,
     errorHandler: errorHandler,
     createSmallPhoto: createSmallPhoto,
     setSimilarElement: setSimilarElement,
