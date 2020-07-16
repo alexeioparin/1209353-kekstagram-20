@@ -22,6 +22,19 @@ window.dataUpload = (function () {
   // Отправка данных формы на сервер
 
   photoUploadForm.addEventListener('submit', function (evt) {
+    // Закрытие по клику на кнопку
+
+    var onClickClosePopupWindow = function (evnt, closedElement) {
+      closedElement.remove();
+      if (closedElement.classList.contains('success')) {
+        document.removeEventListener('keydown', onEscCloseSuccessPopup);
+        document.removeEventListener('click', closeSuccessPopup);
+      } else if (closedElement.classList.contains('error')) {
+        document.removeEventListener('keydown', onEscCloseErrorPopup);
+        document.removeEventListener('click', closeErrorPopup);
+      }
+    };
+
     // Закрытие по esc
     var onEscClosePopupWindow = function (evnt, closedElement) {
       if (evnt.key === window.main.ESC_BUTTON) {
@@ -36,6 +49,7 @@ window.dataUpload = (function () {
         document.removeEventListener('click', closeErrorPopup);
       }
     };
+
     // Закрытие по клику вне попапа
     var onOutWindowClickClose = function (evnt, closedElement, popupElement) {
       evnt.preventDefault();
@@ -51,6 +65,13 @@ window.dataUpload = (function () {
       }
     };
 
+
+    var onClickCloseSuccessPopup = function (evnt) {
+      onClickClosePopupWindow(evnt, window.main.indexMain.querySelector('.success'));
+    };
+    var onClickCloseErrorPopup = function (evnt) {
+      onClickClosePopupWindow(evnt, window.main.indexMain.querySelector('.error'));
+    };
     var onEscCloseSuccessPopup = function (evnt) {
       onEscClosePopupWindow(evnt, window.main.indexMain.querySelector('.success'));
     };
@@ -64,24 +85,29 @@ window.dataUpload = (function () {
       onOutWindowClickClose(evnt, window.main.indexMain.querySelector('.error'), window.main.indexMain.querySelector('.error__inner'));
     };
 
-    window.backend.save(new FormData(photoUploadForm), function () { // Функция успешной загрузки
+    // Функция обработки успешной загрузки
+
+    var onSuccessPopupOpen = function () {
       window.photoRedactor.hideUserPhotoEditor();
       window.main.indexMain.appendChild(createSuccessMessage());
       var closeButton = window.main.indexMain.querySelector('.success__button');
-      closeButton.addEventListener('click', function () {
-        window.main.indexMain.querySelector('.success').remove();
-      });
+      closeButton.addEventListener('click', onClickCloseSuccessPopup);
       document.addEventListener('keydown', onEscCloseSuccessPopup);
       document.addEventListener('click', closeSuccessPopup);
-    }, function () { // Функция ошибки
+    };
+
+    // Функция обработки ошибки
+
+    var onErrorPopupOpen = function () {
+      window.photoRedactor.hideUserPhotoEditor();
       window.main.indexMain.appendChild(createErrorMessage());
       var closeButton = window.main.indexMain.querySelector('.error__button');
-      closeButton.addEventListener('click', function () {
-        window.main.indexMain.querySelector('.error').remove();
-      });
+      closeButton.addEventListener('click', onClickCloseErrorPopup);
       document.addEventListener('keydown', onEscCloseErrorPopup);
       document.addEventListener('click', closeErrorPopup);
-    });
+    };
+
+    window.backend.save(new FormData(photoUploadForm), onSuccessPopupOpen, onErrorPopupOpen);
     evt.preventDefault();
   });
 })();
