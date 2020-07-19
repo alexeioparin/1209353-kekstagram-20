@@ -100,5 +100,6 @@ window.photoRedactor = (function () {
     effectLevelBar: effectLevelBar,
     userPhotoFilter: userPhotoFilter,
     hideUserPhotoEditor: hideUserPhotoEditor,
+    userPhoto: userPhoto,
   };
 })();

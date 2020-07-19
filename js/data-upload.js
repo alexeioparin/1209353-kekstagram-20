@@ -8,15 +8,13 @@ window.dataUpload = (function () {
   // Создание окна сообщения успешной загрузки
 
   var createSuccessMessage = function () {
-    var userElement = successTemplate.cloneNode(true);
-    return userElement;
+    return successTemplate.cloneNode(true);
   };
 
   // Создание окна ошибки загрузки
 
   var createErrorMessage = function () {
-    var userElement = errorTemplate.cloneNode(true);
-    return userElement;
+    return errorTemplate.cloneNode(true);
   };
 
   // Отправка данных формы на сервер
